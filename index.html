@@ -17,7 +17,7 @@
 <body>
 <div class="wrap">
   <div class="card">
-    <img class="hero" src="https://tga168.ai/wp-content/uploads/2025/03/TGA-Board-pros-1-1024x1024.webp" alt="promo" />
+    <img class="hero" src="https://tga168.ai/wp-content/uploads/2024/12/TGA168-Pronew-1-3-1024x1024.webp" alt="promo" />
     <p class="muted" style="margin:10px 6px 0">แชร์กิจกรรมตามกติกาเพื่อรับสิทธิ์</p>
     <button id="shareBtn" class="btn btn-primary">กดแชร์กิจกรรม</button>
   </div>
@@ -26,7 +26,7 @@
 <!-- LIFF SDK -->
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
-const LIFF_ID = "ใส่-LIFF-ID-ของคุณ";
+const LIFF_ID = "2008144040-YZrXRWvr";
 
 // ---------- 1) เตรียม Flex (2 การ์ดแบบ Carousel) ----------
 function flexCarousel() {
@@ -42,10 +42,10 @@ function flexCarousel() {
           size: "mega",
           hero: {
             type: "image",
-            url: "https://tga168.ai/wp-content/uploads/2025/03/TGA-Board-pros-1-1024x1024.webp", // ใส่รูปจริง HTTPS เท่านั้น
+            url: "https://tga168.ai/wp-content/uploads/2024/12/TGA168-Pronew-1-3-1024x1024.webp", // ใส่รูปจริง HTTPS เท่านั้น
             size: "full",
             aspectMode: "cover",
-            aspectRatio: "20:13"
+            aspectRatio: "10:10"
           },
           body: {
             type: "box",
@@ -80,10 +80,10 @@ function flexCarousel() {
           size: "mega",
           hero: {
             type: "image",
-            url: "https://YOUR-CDN/bonus-time.jpg",
+            url: "https://tga168.ai/wp-content/uploads/2024/12/TGA168-Pronew-4-2-1024x1024.webp",
             size: "full",
             aspectMode: "cover",
-            aspectRatio: "20:13"
+            aspectRatio: "10:10"
           },
           body: {
             type: "box",
@@ -102,12 +102,12 @@ function flexCarousel() {
               {
                 type: "button",
                 style: "primary",
-                action: { type: "uri", label: "ทางเข้าเล่น", uri: "https://YOUR-DOMAIN/play" }
+                action: { type: "uri", label: "ทางเข้าเล่น", uri: "https://up-api.buzz/register?partner_ref=seodomain" }
               },
               {
                 type: "button",
                 style: "link",
-                action: { type: "uri", label: "สมัครสมาชิก", uri: "https://YOUR-DOMAIN/register" }
+                action: { type: "uri", label: "สมัครสมาชิก", uri: "https://up-api.buzz/register?partner_ref=seodomain" }
               }
             ]
           }
@@ -151,60 +151,3 @@ document.getElementById('shareBtn').addEventListener('click', async () => {
 </script>
 </body>
 </html>
-<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<script>
-const LIFF_ID = "1661051007-qZ1jPaY3"; // ของคุณ
-
-// ---- Flex สำหรับแชร์ (แก้รูป/ลิงก์เป็นของคุณ) ----
-function flexCarousel(){ /* ... ใช้ตัวเดิมของคุณได้ ... */ }
-
-// ---- บูต LIFF ให้ชัวร์ว่ามี token ----
-async function boot(){
-  try{
-    await liff.init({ liffId: LIFF_ID });
-
-    // บังคับให้มี token เสมอ (ทั้งใน/นอก LINE)
-    if (!liff.isLoggedIn()) {
-      liff.login({ redirectUri: location.href });
-      return; // จะรีไดเรกต์กลับมาใหม่พร้อม token
-    }
-
-    // กันหลุด: ถ้า init แล้วแต่ยังไม่มี token ให้ logout/login อีกรอบ
-    if (!liff.getAccessToken()) {
-      liff.logout();
-      liff.login({ redirectUri: location.href });
-      return;
-    }
-
-    // แชร์ได้เฉพาะใน LINE app
-    if (!liff.isInClient()) {
-      // อยู่นอก LINE → ทำ fallback ได้ แต่อย่าเรียก shareTargetPicker
-      console.log("นอก LINE: ใช้ลิงก์ https://line.me/R/msg/... เป็น fallback ได้");
-    }
-  }catch(e){
-    alert("LIFF init error: " + e.message);
-  }
-}
-boot();
-
-// ---- ปุ่มแชร์ ----
-document.getElementById('shareBtn').addEventListener('click', async () => {
-  try{
-    if (!liff.isInClient()) {
-      alert('กรุณาเปิดลิงก์นี้ภายในแอป LINE'); 
-      return;
-    }
-    if (!liff.isApiAvailable('shareTargetPicker')) {
-      alert('เครื่องนี้ยังไม่รองรับ Share Target Picker');
-      return;
-    }
-    const res = await liff.shareTargetPicker([ flexCarousel() ]);
-    if (res) {
-      alert('แชร์สำเร็จ ขอบคุณครับ');
-      liff.closeWindow();
-    }
-  }catch(err){
-    alert('แชร์ไม่สำเร็จ: ' + err.message);
-  }
-});
-</script>
