@@ -1,1 +1,97 @@
-# promo-page
+<!doctype html>
+<html lang="th">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>โปรโมชัน</title>
+
+<style>
+  body { margin:0; font-family:system-ui, sans-serif; background:#000; }
+  .wrap { min-height:100dvh; display:grid; place-items:center; padding:16px; }
+  .card { width:min(420px, 100%); background:rgba(20,20,20,.9); border-radius:16px; padding:16px; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,.5); }
+  .hero { width:100%; border-radius:14px; display:block; }
+  .btn { display:block; width:100%; padding:14px 16px; margin-top:14px; border-radius:12px; border:0; font-weight:700; }
+  .btn-primary { background:#14b866; color:#fff; }
+  .muted { color:#cfcfcf; font-size:14px; line-height:1.45; }
+</style>
+
+<body>
+<div class="wrap">
+  <div class="card">
+    <img class="hero" src="https://your-cdn.example/promo.jpg" alt="promo" />
+    <p class="muted" style="margin:12px 6px 0;">
+      ได้รับทุนฟรีสำหรับคุณ แค่แชร์กิจกรรมตามเงื่อนไข แล้วกดส่งหลักฐาน
+    </p>
+    <button id="shareBtn" class="btn btn-primary">กดแชร์กิจกรรม</button>
+  </div>
+</div>
+
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script>
+const LIFF_ID = "ใส่-LIFF-ID-ของคุณ"; // <— สำคัญ
+
+async function init() {
+  await liff.init({ liffId: LIFF_ID });
+  // ถ้านอกแอป LINE ให้บังคับล็อกอินแล้วค่อยกลับเข้า
+  if (!liff.isInClient() && !liff.isLoggedIn()) {
+    liff.login(); return;
+  }
+}
+init();
+
+// ตัวอย่าง Flex ที่จะถูกแชร์
+function promoFlex() {
+  return {
+    type: "flex",
+    altText: "โปรโมชันแจกทุนฟรี",
+    contents: {
+      type: "bubble",
+      size: "giga",
+      hero: {
+        type: "image",
+        url: "https://your-cdn.example/promo.jpg",
+        size: "full",
+        aspectMode: "cover",
+        aspectRatio: "20:13"
+      },
+      body: {
+        type: "box",
+        layout: "vertical",
+        contents: [
+          { type: "text", text: "แจกทุนฟรี 100", weight: "bold", size: "xl" },
+          { type: "text", text: "ทำกติกาแล้วรับสิทธิ์", size: "sm", color: "#aaaaaa" }
+        ]
+      },
+      footer: {
+        type: "box",
+        layout: "vertical",
+        spacing: "md",
+        contents: [
+          {
+            type: "button",
+            style: "primary",
+            action: { type: "uri", label: "ร่วมกิจกรรม", uri: "https://liff.line.me/"+LIFF_ID }
+          }
+        ]
+      }
+    }
+  };
+}
+
+document.getElementById('shareBtn').addEventListener('click', async () => {
+  try {
+    const res = await liff.shareTargetPicker([ promoFlex() ]);
+    // ถ้าส่งสำเร็จ res จะเป็น object; ถ้ากดยกเลิกจะได้ undefined
+    if (res) {
+      // (ออปชัน) แจ้งเซิร์ฟเวอร์ว่าคนนี้แชร์แล้ว
+      // await fetch("https://your-webhook.example/log", { method:"POST", body: JSON.stringify(await liff.getProfile()) });
+
+      alert("แชร์สำเร็จ ขอบคุณครับ!");
+      liff.closeWindow();
+    }
+  } catch (e) {
+    alert("แชร์ไม่สำเร็จ: " + e.message);
+  }
+});
+</script>
+</body>
+</html>
