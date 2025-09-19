@@ -1,60 +1,57 @@
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
-const LIFF_ID = "1661051007-qZ1jPaY3"; // ใช้ ID เดิมนี่แหละ
+const LIFF_ID = "1661051007-qZ1jPaY3"; // ของคุณ
 
-// Flex แบบคารูเซล 2 ใบ (แก้รูป/ลิงก์ตามต้องการ)
-function flexCarousel(){
-  return {
-    type:"flex",
-    altText:"โปรโมชันแจกทุน + เกมมาแรง",
-    contents:{
-      type:"carousel",
-      contents:[
-        {
-          type:"bubble",
-          size:"mega",
-          hero:{ type:"image", url:"https://YOUR-CDN/promo-100.jpg", size:"full", aspectMode:"cover", aspectRatio:"20:13" },
-          body:{ type:"box", layout:"vertical", contents:[
-            { type:"text", text:"สมัครรับทันที 100", weight:"bold", size:"xl" },
-            { type:"text", text:"ทำกติกาให้ครบ แล้วรับสิทธิ์ได้เลย", size:"sm", color:"#aaaaaa", wrap:true }
-          ]},
-          footer:{ type:"box", layout:"vertical", spacing:"md", contents:[
-            { type:"button", style:"primary", action:{ type:"uri", label:"ร่วมกิจกรรม", uri:"https://liff.line.me/"+LIFF_ID } },
-            { type:"button", style:"link", action:{ type:"uri", label:"เข้าสู่ระบบ", uri:"https://YOUR-DOMAIN/login" } }
-          ]}
-        },
-        {
-          type:"bubble",
-          size:"mega",
-          hero:{ type:"image", url:"https://YOUR-CDN/bonus-time.jpg", size:"full", aspectMode:"cover", aspectRatio:"20:13" },
-          body:{ type:"box", layout:"vertical", contents:[
-            { type:"text", text:"BONUS TIME", weight:"bold", size:"xl" },
-            { type:"text", text:"ช่วงพีค อัตราเข้าฟีเจอร์ดีขึ้น", size:"sm", color:"#aaaaaa", wrap:true }
-          ]},
-          footer:{ type:"box", layout:"vertical", spacing:"md", contents:[
-            { type:"button", style:"primary", action:{ type:"uri", label:"ทางเข้าเล่น", uri:"https://YOUR-DOMAIN/play" } },
-            { type:"button", style:"link", action:{ type:"uri", label:"สมัครสมาชิก", uri:"https://YOUR-DOMAIN/register" } }
-          ]}
-        }
-      ]
-    }
-  };
-}
+// ---- Flex สำหรับแชร์ (แก้รูป/ลิงก์เป็นของคุณ) ----
+function flexCarousel(){ /* ... ใช้ตัวเดิมของคุณได้ ... */ }
 
+// ---- บูต LIFF ให้ชัวร์ว่ามี token ----
 async function boot(){
-  await liff.init({ liffId: LIFF_ID });
-  if (!liff.isInClient() && !liff.isLoggedIn()) { liff.login(); return; }
-  if (!liff.isApiAvailable('shareTargetPicker')) {
-    alert('อุปกรณ์นี้ยังไม่รองรับการแชร์แบบเลือกห้อง'); 
+  try{
+    await liff.init({ liffId: LIFF_ID });
+
+    // บังคับให้มี token เสมอ (ทั้งใน/นอก LINE)
+    if (!liff.isLoggedIn()) {
+      liff.login({ redirectUri: location.href });
+      return; // จะรีไดเรกต์กลับมาใหม่พร้อม token
+    }
+
+    // กันหลุด: ถ้า init แล้วแต่ยังไม่มี token ให้ logout/login อีกรอบ
+    if (!liff.getAccessToken()) {
+      liff.logout();
+      liff.login({ redirectUri: location.href });
+      return;
+    }
+
+    // แชร์ได้เฉพาะใน LINE app
+    if (!liff.isInClient()) {
+      // อยู่นอก LINE → ทำ fallback ได้ แต่อย่าเรียก shareTargetPicker
+      console.log("นอก LINE: ใช้ลิงก์ https://line.me/R/msg/... เป็น fallback ได้");
+    }
+  }catch(e){
+    alert("LIFF init error: " + e.message);
   }
 }
 boot();
 
-// ผูกกับปุ่มแชร์ของคุณ (เช่น id="shareBtn")
+// ---- ปุ่มแชร์ ----
 document.getElementById('shareBtn').addEventListener('click', async () => {
   try{
+    if (!liff.isInClient()) {
+      alert('กรุณาเปิดลิงก์นี้ภายในแอป LINE'); 
+      return;
+    }
+    if (!liff.isApiAvailable('shareTargetPicker')) {
+      alert('เครื่องนี้ยังไม่รองรับ Share Target Picker');
+      return;
+    }
     const res = await liff.shareTargetPicker([ flexCarousel() ]);
-    if (res) { alert('แชร์สำเร็จ!'); liff.closeWindow(); }
-  }catch(e){ alert('แชร์ไม่สำเร็จ: '+e.message); }
+    if (res) {
+      alert('แชร์สำเร็จ ขอบคุณครับ');
+      liff.closeWindow();
+    }
+  }catch(err){
+    alert('แชร์ไม่สำเร็จ: ' + err.message);
+  }
 });
 </script>
