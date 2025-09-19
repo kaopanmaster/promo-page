@@ -26,23 +26,106 @@
 <!-- LIFF SDK -->
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script>
-const LIFF_ID = "2008144040-YZrXRWvr";  // ใช้ตัวนี้ตามที่คุณสร้าง
+const LIFF_ID = "2008144040-YZrXRWvr"; // LIFF ของคุณ
 
-// --- Flex ที่จะส่ง (คงของเดิมไว้ได้) ---
-function flexCarousel() { /* ... ของเดิมคุณ ... */ }
+// ---------- Flex (2 การ์ดแบบ Carousel) ----------
+function flexCarousel() {
+  return {
+    type: "flex",
+    altText: "โปรโมชัน TGA168",
+    contents: {
+      type: "carousel",
+      contents: [
+        // การ์ด 1
+        {
+          type: "bubble",
+          size: "mega",
+          hero: {
+            type: "image",
+            url: "https://tga168.ai/wp-content/uploads/2024/12/TGA168-Pronew-1-3-1024x1024.webp",
+            size: "full",
+            aspectMode: "cover",
+            aspectRatio: "1:1"
+          },
+          body: {
+            type: "box",
+            layout: "vertical",
+            spacing: "sm",
+            contents: [
+              { type: "text", text: "สมัครรับทันที 100", weight: "bold", size: "xl" },
+              { type: "text", text: "ทำกติกาให้ครบ แล้วรับสิทธิ์ได้เลย", size: "sm", color: "#aaaaaa", wrap: true }
+            ]
+          },
+          footer: {
+            type: "box",
+            layout: "vertical",
+            spacing: "md",
+            contents: [
+              {
+                type: "button",
+                style: "primary",
+                action: { type: "uri", label: "ร่วมกิจกรรม", uri: "https://liff.line.me/" + LIFF_ID }
+              },
+              {
+                type: "button",
+                style: "link",
+                action: { type: "uri", label: "เข้าสู่ระบบ", uri: "https://up-api.buzz/register?partner_ref=seodomain" }
+              }
+            ]
+          }
+        },
+        // การ์ด 2
+        {
+          type: "bubble",
+          size: "mega",
+          hero: {
+            type: "image",
+            url: "https://tga168.ai/wp-content/uploads/2024/12/TGA168-Pronew-4-2-1024x1024.webp",
+            size: "full",
+            aspectMode: "cover",
+            aspectRatio: "1:1"
+          },
+          body: {
+            type: "box",
+            layout: "vertical",
+            spacing: "sm",
+            contents: [
+              { type: "text", text: "BONUS TIME", weight: "bold", size: "xl" },
+              { type: "text", text: "อัตราเข้าฟีเจอร์สูงขึ้นช่วงเวลาพิเศษ", size: "sm", color: "#aaaaaa", wrap: true }
+            ]
+          },
+          footer: {
+            type: "box",
+            layout: "vertical",
+            spacing: "md",
+            contents: [
+              {
+                type: "button",
+                style: "primary",
+                action: { type: "uri", label: "ทางเข้าเล่น", uri: "https://up-api.buzz/register?partner_ref=seodomain" }
+              },
+              {
+                type: "button",
+                style: "link",
+                action: { type: "uri", label: "สมัครสมาชิก", uri: "https://up-api.buzz/register?partner_ref=seodomain" }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  };
+}
 
-// --- บูต LIFF ให้ "มี token แน่ๆ" ไม่ว่าข้างใน/ข้างนอก LINE ---
+// ---------- Init + กันตายเรื่อง token ----------
 async function ensureReady() {
   await liff.init({ liffId: LIFF_ID });
 
-  // 1) ถ้ายังไม่ login ให้ login เสมอ (ทั้งใน/นอก LINE)
-  if (!liff.isLoggedIn()) {
+  if (!liff.isLoggedIn()) {            // ให้มี token เสมอ
     liff.login({ redirectUri: location.href });
-    return false;               // จะรีไดเรกต์กลับมาพร้อม token
+    return false;
   }
-
-  // 2) กันเคส init แล้ว token ว่าง → รีล็อกอินอีกรอบ
-  if (!liff.getAccessToken()) {
+  if (!liff.getAccessToken()) {        // กันเคส token ว่าง
     liff.logout();
     liff.login({ redirectUri: location.href });
     return false;
@@ -51,29 +134,27 @@ async function ensureReady() {
 }
 
 (async () => {
-  const ready = await ensureReady();
-  if (!ready) return;
+  const ok = await ensureReady();
+  if (!ok) return;
 
   // ปุ่มแชร์
-  const btn = document.getElementById('shareBtn');
-  btn.onclick = async () => {
-    // แชร์ได้เฉพาะในแอป LINE
-    if (!liff.isInClient()) {
-      // พาคนเปิดใน LINE อัตโนมัติ
-      location.href = 'https://liff.line.me/' + LIFF_ID + location.search;
-      return;
-    }
-    if (!liff.isApiAvailable('shareTargetPicker')) {
-      alert('เครื่องนี้ยังไม่รองรับการแชร์แบบเลือกห้อง');
-      return;
-    }
+  document.getElementById('shareBtn').addEventListener('click', async () => {
     try {
+      if (!liff.isInClient()) {
+        // พาคนเปิดใน LINE อัตโนมัติ
+        location.href = 'https://liff.line.me/' + LIFF_ID + location.search;
+        return;
+      }
+      if (!liff.isApiAvailable('shareTargetPicker')) {
+        alert('อุปกรณ์นี้ยังไม่รองรับการแชร์แบบเลือกห้อง');
+        return;
+      }
       const res = await liff.shareTargetPicker([ flexCarousel() ]);
       if (res) { alert('แชร์สำเร็จ'); liff.closeWindow(); }
-    } catch (e) {
-      alert('แชร์ไม่สำเร็จ: ' + e.message);
+    } catch (err) {
+      alert('แชร์ไม่สำเร็จ: ' + err.message);
     }
-  };
+  });
 })();
 </script>
 </body>
