@@ -66,51 +66,68 @@ function flexCarousel() {
       aspectMode: "cover",
       action: { type: "uri", uri: "https://line.me/" }
     },
-    body: {
-      type: "box",
-      layout: "vertical",
-      contents: [
-        { type: "text", text: "โปรฉลองยูสเซอร์ใหม่", weight: "regular", size: "xl", color: "#EFFA11" },
+"body": {
+  "type": "box",
+  "layout": "vertical",
+  "paddingAll": "12px",
+  "background": {
+    "type": "linearGradient",
+    "angle": "0deg",                     // 0 = ไล่สีจากล่างขึ้นบน
+    "startColor": "#5e0a75",
+    "centerColor": "#2b0035",
+    "endColor": "#03011c",
+    "centerPosition": "55%"
+  },
+  "contents": [
+    { "type": "text", "text": "โปรฉลองยูสเซอร์ใหม่", "size": "xl", "color": "#EFFA11" },
+    {
+      "type": "box",
+      "layout": "vertical",
+      "margin": "lg",
+      "spacing": "sm",
+      "contents": [
         {
-          type: "box",
-          layout: "vertical",
-          margin: "lg",
-          spacing: "sm",
-          contents: [
-            { type: "box", layout: "baseline", spacing: "sm",
-              contents: [
-                { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
-                { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
-                { type: "text", text: "50 รับ 75", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
-              ]},
-            { type: "box", layout: "baseline", spacing: "sm",
-              contents: [
-                { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
-                { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
-                { type: "text", text: "100 รับ 150", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
-              ]},
-            { type: "box", layout: "baseline", spacing: "sm",
-              contents: [
-                { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
-                { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
-                { type: "text", text: "200 รับ 300", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
-              ]},
-            { type: "box", layout: "baseline", spacing: "sm",
-              contents: [
-                { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
-                { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
-                { type: "text", text: "500 รับ 750", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
-              ]}
+          "type": "box", "layout": "baseline", "spacing": "sm",
+          "contents": [
+            { "type": "icon", "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png", "margin": "10px" },
+            { "type": "text", "text": "ฝาก", "color": "#EFFA11", "size": "sm", "flex": 2, "weight": "bold" },
+            { "type": "text", "text": "50 รับ 75", "color": "#FFFFFF", "size": "sm", "flex": 5, "wrap": true }
+          ],
+          "borderWidth": "2px", "borderColor": "#FFFFFF", "cornerRadius": "30px",
+          "paddingAll": "5px", "backgroundColor": "#000000"
+        },
+        { "type": "box", "layout": "baseline", "spacing": "sm",
+          "contents": [
+            { "type": "icon", "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
+            { "type": "text", "text": "ฝาก", "color": "#EFFA11", "size": "sm", "flex": 2, "weight": "bold" },
+            { "type": "text", "text": "100 รับ 150", "color": "#FFFFFF", "size": "sm", "flex": 5, "wrap": true }
           ]
         },
-        { type: "box", layout: "baseline", spacing: "sm", paddingStart: "10px",
-          contents: [
-            { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
-            { type: "text", text: "ทำเทิร์น 4 เท่า ถอนได้ 3 เท่า", color: "#EFFA11", size: "sm", weight: "bold" }
+        { "type": "box", "layout": "baseline", "spacing": "sm",
+          "contents": [
+            { "type": "icon", "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
+            { "type": "text", "text": "ฝาก", "color": "#EFFA11", "size": "sm", "flex": 2, "weight": "bold" },
+            { "type": "text", "text": "200 รับ 300", "color": "#FFFFFF", "size": "sm", "flex": 5, "wrap": true }
+          ]
+        },
+        { "type": "box", "layout": "baseline", "spacing": "sm",
+          "contents": [
+            { "type": "icon", "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
+            { "type": "text", "text": "ฝาก", "color": "#EFFA11", "size": "sm", "flex": 2, "weight": "bold" },
+            { "type": "text", "text": "500 รับ 750", "color": "#FFFFFF", "size": "sm", "flex": 5, "wrap": true }
           ]
         }
       ]
     },
+    {
+      "type": "box", "layout": "baseline", "spacing": "sm", "paddingStart": "10px",
+      "contents": [
+        { "type": "icon", "url": "https://www.freeiconspng.com/uploads/new-flame-icon-png-12.png" },
+        { "type": "text", "text": "ทำเทิร์น 4 เท่า ถอนได้ 3 เท่า", "color": "#EFFA11", "size": "sm", "weight": "bold" }
+      ]
+    }
+  ]
+},
     footer: {
       type: "box",
       layout: "vertical",
