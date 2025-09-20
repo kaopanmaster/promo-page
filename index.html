@@ -53,8 +53,7 @@
 <script>
 const LIFF_ID = "2008144040-YZrXRWvr"; // LIFF ของคุณ
 
-// ---------- Flex (2 การ์ดแบบ Carousel) ----------
-<script>
+// ---------- Flex (Carousel 2 bubble) ----------
 function flexCarousel() {
   const bubble1 = {
     type: "bubble",
@@ -78,42 +77,33 @@ function flexCarousel() {
           margin: "lg",
           spacing: "sm",
           contents: [
-            {
-              type: "box", layout: "baseline", spacing: "sm",
+            { type: "box", layout: "baseline", spacing: "sm",
               contents: [
                 { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
                 { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
                 { type: "text", text: "50 รับ 75", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
-              ]
-            },
-            {
-              type: "box", layout: "baseline", spacing: "sm",
+              ]},
+            { type: "box", layout: "baseline", spacing: "sm",
               contents: [
                 { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
                 { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
                 { type: "text", text: "100 รับ 150", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
-              ]
-            },
-            {
-              type: "box", layout: "baseline", spacing: "sm",
+              ]},
+            { type: "box", layout: "baseline", spacing: "sm",
               contents: [
                 { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
                 { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
                 { type: "text", text: "200 รับ 300", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
-              ]
-            },
-            {
-              type: "box", layout: "baseline", spacing: "sm",
+              ]},
+            { type: "box", layout: "baseline", spacing: "sm",
               contents: [
                 { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
                 { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
                 { type: "text", text: "500 รับ 750", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
-              ]
-            }
+              ]}
           ]
         },
-        {
-          type: "box", layout: "baseline", spacing: "sm", paddingStart: "10px",
+        { type: "box", layout: "baseline", spacing: "sm", paddingStart: "10px",
           contents: [
             { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
             { type: "text", text: "ทำเทิร์น 4 เท่า ถอนได้ 3 เท่า", color: "#EFFA11", size: "sm", weight: "bold" }
@@ -126,24 +116,16 @@ function flexCarousel() {
       layout: "vertical",
       spacing: "sm",
       contents: [
-        { type: "button", style: "primary", height: "sm",
-          color: "#7C3AED",
-          action: { type: "uri", label: "สมัครสมาชิก", uri: "https://line.me/" }
-        },
-        { type: "button", style: "link", height: "sm",
-          action: { type: "uri", label: "ติดต่อเรา", uri: "https://line.me/" },
-          color: "#5EFF69"
-        },
+        { type: "button", style: "primary", height: "sm", color: "#7C3AED",
+          action: { type: "uri", label: "สมัครสมาชิก", uri: "https://line.me/" } },
+        { type: "button", style: "link", height: "sm", 
+          action: { type: "uri", label: "ติดต่อเรา", uri: "https://line.me/" }, color: "#5EFF69" },
         { type: "box", layout: "vertical", contents: [], margin: "sm" }
       ]
     },
-    styles: {
-      body: { backgroundColor: "#0B0615" },
-      footer: { backgroundColor: "#0B0615" }
-    }
+    styles: { body: { backgroundColor: "#0B0615" }, footer: { backgroundColor: "#0B0615" } }
   };
 
-  // bubble 2 โทนเดียวกัน ปรับข้อความ/ลิงก์ตามต้องการ
   const bubble2 = {
     type: "bubble",
     size: "mega",
@@ -168,20 +150,13 @@ function flexCarousel() {
       layout: "vertical",
       spacing: "sm",
       contents: [
-        { type: "button", style: "primary", height: "sm",
-          color: "#7C3AED",
-          action: { type: "uri", label: "ทางเข้าเล่น", uri: "https://line.me/" }
-        },
+        { type: "button", style: "primary", height: "sm", color: "#7C3AED",
+          action: { type: "uri", label: "ทางเข้าเล่น", uri: "https://line.me/" } },
         { type: "button", style: "link", height: "sm",
-          action: { type: "uri", label: "รายละเอียด", uri: "https://line.me/" },
-          color: "#B8AAF2"
-        }
+          action: { type: "uri", label: "รายละเอียด", uri: "https://line.me/" }, color: "#B8AAF2" }
       ]
     },
-    styles: {
-      body: { backgroundColor: "#0B0615" },
-      footer: { backgroundColor: "#0B0615" }
-    }
+    styles: { body: { backgroundColor: "#0B0615" }, footer: { backgroundColor: "#0B0615" } }
   };
 
   return {
@@ -194,16 +169,8 @@ function flexCarousel() {
 // ---------- Init + กันตายเรื่อง token ----------
 async function ensureReady() {
   await liff.init({ liffId: LIFF_ID });
-
-  if (!liff.isLoggedIn()) {            // ให้มี token เสมอ
-    liff.login({ redirectUri: location.href });
-    return false;
-  }
-  if (!liff.getAccessToken()) {        // กันเคส token ว่าง
-    liff.logout();
-    liff.login({ redirectUri: location.href });
-    return false;
-  }
+  if (!liff.isLoggedIn()) { liff.login({ redirectUri: location.href }); return false; }
+  if (!liff.getAccessToken()) { liff.logout(); liff.login({ redirectUri: location.href }); return false; }
   return true;
 }
 
@@ -211,23 +178,13 @@ async function ensureReady() {
   const ok = await ensureReady();
   if (!ok) return;
 
-  // ปุ่มแชร์
   document.getElementById('shareBtn').addEventListener('click', async () => {
     try {
-      if (!liff.isInClient()) {
-        // พาคนเปิดใน LINE อัตโนมัติ
-        location.href = 'https://liff.line.me/' + LIFF_ID + location.search;
-        return;
-      }
-      if (!liff.isApiAvailable('shareTargetPicker')) {
-        alert('อุปกรณ์นี้ยังไม่รองรับการแชร์แบบเลือกห้อง');
-        return;
-      }
+      if (!liff.isInClient()) { location.href = 'https://liff.line.me/' + LIFF_ID + location.search; return; }
+      if (!liff.isApiAvailable('shareTargetPicker')) { alert('อุปกรณ์นี้ยังไม่รองรับการแชร์แบบเลือกห้อง'); return; }
       const res = await liff.shareTargetPicker([ flexCarousel() ]);
       if (res) { alert('แชร์สำเร็จ'); liff.closeWindow(); }
-    } catch (err) {
-      alert('แชร์ไม่สำเร็จ: ' + err.message);
-    }
+    } catch (err) { alert('แชร์ไม่สำเร็จ: ' + err.message); }
   });
 })();
 </script>
