@@ -54,217 +54,141 @@
 const LIFF_ID = "2008144040-YZrXRWvr"; // LIFF ของคุณ
 
 // ---------- Flex (2 การ์ดแบบ Carousel) ----------
+<script>
 function flexCarousel() {
+  const bubble1 = {
+    type: "bubble",
+    size: "mega",
+    hero: {
+      type: "image",
+      url: "https://tga168.ai/wp-content/uploads/2025/03/TGA-Board-pros-1-1024x1024.webp",
+      size: "full",
+      aspectRatio: "1:1",
+      aspectMode: "cover",
+      action: { type: "uri", uri: "https://line.me/" }
+    },
+    body: {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        { type: "text", text: "โปรฉลองยูสเซอร์ใหม่", weight: "regular", size: "xl", color: "#EFFA11" },
+        {
+          type: "box",
+          layout: "vertical",
+          margin: "lg",
+          spacing: "sm",
+          contents: [
+            {
+              type: "box", layout: "baseline", spacing: "sm",
+              contents: [
+                { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
+                { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
+                { type: "text", text: "50 รับ 75", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
+              ]
+            },
+            {
+              type: "box", layout: "baseline", spacing: "sm",
+              contents: [
+                { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
+                { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
+                { type: "text", text: "100 รับ 150", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
+              ]
+            },
+            {
+              type: "box", layout: "baseline", spacing: "sm",
+              contents: [
+                { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
+                { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
+                { type: "text", text: "200 รับ 300", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
+              ]
+            },
+            {
+              type: "box", layout: "baseline", spacing: "sm",
+              contents: [
+                { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
+                { type: "text", text: "ฝาก", color: "#EFFA11", size: "sm", flex: 2, weight: "bold" },
+                { type: "text", text: "500 รับ 750", wrap: true, color: "#ffffff", size: "sm", flex: 5 }
+              ]
+            }
+          ]
+        },
+        {
+          type: "box", layout: "baseline", spacing: "sm", paddingStart: "10px",
+          contents: [
+            { type: "icon", url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png" },
+            { type: "text", text: "ทำเทิร์น 4 เท่า ถอนได้ 3 เท่า", color: "#EFFA11", size: "sm", weight: "bold" }
+          ]
+        }
+      ]
+    },
+    footer: {
+      type: "box",
+      layout: "vertical",
+      spacing: "sm",
+      contents: [
+        { type: "button", style: "primary", height: "sm",
+          color: "#7C3AED",
+          action: { type: "uri", label: "สมัครสมาชิก", uri: "https://line.me/" }
+        },
+        { type: "button", style: "link", height: "sm",
+          action: { type: "uri", label: "ติดต่อเรา", uri: "https://line.me/" },
+          color: "#5EFF69"
+        },
+        { type: "box", layout: "vertical", contents: [], margin: "sm" }
+      ]
+    },
+    styles: {
+      body: { backgroundColor: "#0B0615" },
+      footer: { backgroundColor: "#0B0615" }
+    }
+  };
+
+  // bubble 2 โทนเดียวกัน ปรับข้อความ/ลิงก์ตามต้องการ
+  const bubble2 = {
+    type: "bubble",
+    size: "mega",
+    hero: {
+      type: "image",
+      url: "https://tga168.ai/wp-content/uploads/2024/12/TGA168-Pronew-4-2-1024x1024.webp",
+      size: "full",
+      aspectRatio: "1:1",
+      aspectMode: "cover",
+      action: { type: "uri", uri: "https://line.me/" }
+    },
+    body: {
+      type: "box",
+      layout: "vertical",
+      contents: [
+        { type: "text", text: "BONUS TIME", weight: "bold", size: "xl", color: "#EDE9FE" },
+        { type: "text", text: "ช่วงพีค อัตราเข้าฟีเจอร์สูง", size: "sm", color: "#B8AAF2", wrap: true }
+      ]
+    },
+    footer: {
+      type: "box",
+      layout: "vertical",
+      spacing: "sm",
+      contents: [
+        { type: "button", style: "primary", height: "sm",
+          color: "#7C3AED",
+          action: { type: "uri", label: "ทางเข้าเล่น", uri: "https://line.me/" }
+        },
+        { type: "button", style: "link", height: "sm",
+          action: { type: "uri", label: "รายละเอียด", uri: "https://line.me/" },
+          color: "#B8AAF2"
+        }
+      ]
+    },
+    styles: {
+      body: { backgroundColor: "#0B0615" },
+      footer: { backgroundColor: "#0B0615" }
+    }
+  };
+
   return {
-  "type": "bubble",
-  "hero": {
-    "type": "image",
-    "url": "https://tga168.ai/wp-content/uploads/2025/03/TGA-Board-pros-1-1024x1024.webp",
-    "size": "full",
-    "aspectRatio": "10:10",
-    "aspectMode": "cover",
-    "action": {
-      "type": "uri",
-      "uri": "https://line.me/"
-    }
-  },
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
-      {
-        "type": "text",
-        "text": "โปรฉลองยูสเซอร์ใหม่",
-        "weight": "regular",
-        "size": "xl",
-        "color": "#EFFA11"
-      },
-      {
-        "type": "box",
-        "layout": "vertical",
-        "margin": "lg",
-        "spacing": "sm",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "icon",
-                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
-              },
-              {
-                "type": "text",
-                "text": "ฝาก",
-                "color": "#EFFA11",
-                "size": "sm",
-                "flex": 2,
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": "50 รับ 75",
-                "wrap": true,
-                "color": "#ffffff",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "icon",
-                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
-              },
-              {
-                "type": "text",
-                "text": "ฝาก",
-                "color": "#EFFA11",
-                "size": "sm",
-                "flex": 2,
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": "100 รับ 150",
-                "wrap": true,
-                "color": "#ffffff",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "icon",
-                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
-              },
-              {
-                "type": "text",
-                "text": "ฝาก",
-                "color": "#EFFA11",
-                "size": "sm",
-                "flex": 2,
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": "200 รับ 300",
-                "wrap": true,
-                "color": "#ffffff",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "baseline",
-            "spacing": "sm",
-            "contents": [
-              {
-                "type": "icon",
-                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
-              },
-              {
-                "type": "text",
-                "text": "ฝาก",
-                "color": "#EFFA11",
-                "size": "sm",
-                "flex": 2,
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": "500 รับ 750",
-                "wrap": true,
-                "color": "#ffffff",
-                "size": "sm",
-                "flex": 5
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "type": "box",
-        "layout": "baseline",
-        "spacing": "sm",
-        "contents": [
-          {
-            "type": "icon",
-            "url": "https://www.freeiconspng.com/uploads/new-flame-icon-png-12.png"
-          },
-          {
-            "type": "text",
-            "text": "ทำเทิร์น 4 เท่า ถอนได้ 3 เท่า",
-            "color": "#EFFA11",
-            "size": "sm",
-            "weight": "bold"
-          }
-        ],
-        "paddingStart": "10px"
-      }
-    ],
-    "background": {
-      "type": "linearGradient",
-      "angle": "0deg",
-      "startColor": "#5e0a75",
-      "endColor": "#03011c",
-      "centerColor": "#2b0035",
-      "centerPosition": "50%"
-    }
-  },
-  "footer": {
-    "type": "box",
-    "layout": "vertical",
-    "spacing": "sm",
-    "contents": [
-      {
-        "type": "button",
-        "style": "primary",
-        "height": "sm",
-        "action": {
-          "type": "uri",
-          "label": "สมัครสมาชิก",
-          "uri": "https://line.me/"
-        },
-        "color": "#EF29FF"
-      },
-      {
-        "type": "button",
-        "style": "secondary",
-        "height": "sm",
-        "action": {
-          "type": "uri",
-          "label": "ติดต่อเรา",
-          "uri": "https://line.me/"
-        },
-        "color": "#5EFF69"
-      },
-      {
-        "type": "box",
-        "layout": "vertical",
-        "contents": [],
-        "margin": "sm"
-      }
-    ],
-    "flex": 0
-  },
-  "styles": {
-    "footer": {
-      "backgroundColor": "#5e0a75"
-    }
-  }
+    type: "flex",
+    altText: "โปรฉลองยูสเซอร์ใหม่ (คารูเซล 2 ใบ)",
+    contents: { type: "carousel", contents: [bubble1, bubble2] }
+  };
 }
 
 // ---------- Init + กันตายเรื่อง token ----------
